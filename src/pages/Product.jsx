@@ -6,37 +6,51 @@ import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
 import { Footer, Navbar } from "../components";
+import { useCollection, useDocument } from "react-firebase-hooks/firestore";
+import { collection, doc, query, where } from "firebase/firestore";
+import { firestore } from "../firebase";
 
 const Product = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  // const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [loading, setLoading2] = useState(false);
 
+  const [value, loading, error] = useDocument(
+    doc(firestore, 'products', id),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
+
+  const [products, loading2, prodErr] = useCollection(
+    query(collection(firestore, "products"),where("__name__", "!=",id))
+  );
+ 
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
     dispatch(addCart(product));
   };
 
-  useEffect(() => {
-    const getProduct = async () => {
-      setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
-    };
-    getProduct();
-  }, [id]);
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     setLoading(true);
+  //     setLoading2(true);
+  //     const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  //     const data = await response.json();
+  //     setProduct(data);
+  //     setLoading(false);
+  //     const response2 = await fetch(
+  //       `https://fakestoreapi.com/products/category/${data.category}`
+  //     );
+  //     const data2 = await response2.json();
+  //     setSimilarProducts(data2);
+  //     setLoading2(false);
+  //   };
+  //   getProduct();
+  // }, [id]);
 
   const Loading = () => {
     return (
@@ -60,8 +74,10 @@ const Product = () => {
       </>
     );
   };
+  
 
   const ShowProduct = () => {
+    const product = value.data();
     return (
       <>
         <div className="container my-5 py-2">
@@ -79,10 +95,10 @@ const Product = () => {
               <h4 className="text-uppercase text-muted">{product.category}</h4>
               <h1 className="display-5">{product.title}</h1>
               <p className="lead">
-                {product.rating && product.rating.rate}{" "}
+                {product.rating}{" "}
                 <i className="fa fa-star"></i>
               </p>
-              <h3 className="display-6  my-4">${product.price}</h3>
+              <h3 className="display-6  my-4">{product.price} tk</h3>
               <p className="lead">{product.description}</p>
               <button
                 className="btn btn-outline-dark"
@@ -128,7 +144,11 @@ const Product = () => {
       <>
         <div className="py-4 my-4">
           <div className="d-flex">
-            {similarProducts.map((item) => {
+            {products?.docs?.map((doc) => {
+          const item = {
+            id: doc.id,
+            ...doc.data(),
+          };
               return (
                 <div key={item.id} className="card mx-4 text-center">
                   <img
