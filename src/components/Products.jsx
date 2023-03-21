@@ -19,10 +19,10 @@ const Products = () => {
     const data = [];
 
     if (!!filter) data.push(where("tag", "==", filter));
-    if (!!searchTerm) {
-      data.push(where("title", ">=", searchTerm));
-      // data.push(where("title", "<=", searchTerm));
-    }
+    // if (!!searchTerm) {
+    //   data.push(where("title", ">=", searchTerm));
+    //   data.push(where("title", "<=", searchTerm));
+    // }
 
     return data;
   }, [searchTerm, filter]);
@@ -112,6 +112,7 @@ const Products = () => {
             id: doc.id,
             ...doc.data(),
           };
+          if(!!searchTerm && !product.title?.toLowerCase()?.includes(searchTerm.toLowerCase())) {return null}
           return (
             <div
               id={product.id}
@@ -127,10 +128,10 @@ const Products = () => {
                 />
                 <div className="card-body">
                   <h5 className="card-title">
-                    {product.title.substring(0, 12)}...
+                  {product.title?.substring(0, 12)}...
                   </h5>
                   <p className="card-text">
-                    {product.description.substring(0, 90)}...
+                    {product.description?.substring(0, 90)}...
                   </p>
                 </div>
                 <ul className="list-group list-group-flush">

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Checkout = () => {
   const state = useSelector((state) => state.handleCart);
-
+  
   const EmptyCart = () => {
     return (
       <div className="container">
@@ -21,6 +21,8 @@ const Checkout = () => {
   };
 
   const ShowCheckout = () => {
+    const [firstName, setFirstName] = React.useState("")
+  const [lastName, setLastName] = React.useState("")
     let subtotal = 0;
     let shipping = 30.0;
     let totalItems = 0;
@@ -43,18 +45,18 @@ const Checkout = () => {
                 <div className="card-body">
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                      Products ({totalItems})<span>${Math.round(subtotal)}</span>
+                      Products ({totalItems})<span>{Math.round(subtotal)} tk</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                       Shipping
-                      <span>${shipping}</span>
+                      <span>{shipping} tk</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                       <div>
                         <strong>Total amount</strong>
                       </div>
                       <span>
-                        <strong>${Math.round(subtotal + shipping)}</strong>
+                        <strong>{Math.round(subtotal + shipping)} tk</strong>
                       </span>
                     </li>
                   </ul>
@@ -73,13 +75,15 @@ const Checkout = () => {
                         <label for="firstName" className="form-label">
                           First name
                         </label>
+
                         <input
                           type="text"
                           className="form-control"
                           id="firstName"
                           placeholder=""
-                          value=""
+                          value={firstName}
                           required
+                          onChange={e =>setFirstName(e.target.value)}
                         />
                         <div className="invalid-feedback">
                           Valid first name is required.
@@ -93,10 +97,10 @@ const Checkout = () => {
                         <input
                           type="text"
                           className="form-control"
-                          id="lastName"
-                          placeholder=""
-                          value=""
+                          
+                          value={lastName}
                           required
+                          onChange={e =>setLastName(e.target.value)}
                         />
                         <div className="invalid-feedback">
                           Valid last name is required.
@@ -271,7 +275,7 @@ const Checkout = () => {
 
                     <button
                       className="w-100 btn btn-primary "
-                      type="submit" disabled
+                      type="submit" onClick={() =>{alert("confirmed")}}
                     >
                       Continue to checkout
                     </button>
