@@ -13,9 +13,6 @@ https://stalwart-figolla-b76076.netlify.app/
 - Fully Responsive
 
 
-## Screenshots
-
-![App Screenshot](https://i.ibb.co/fQ293tm/image.png)
 
 
 
