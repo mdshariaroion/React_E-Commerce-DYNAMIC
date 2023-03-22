@@ -41,7 +41,7 @@ const ContactPage = () => {
                 <button
                   class="my-2 px-4 mx-auto btn btn-dark"
                   type="submit"
-                  disabled
+                   onClick={() =>{alert("Thank You For Your Submission")}}
                 >
                   Send
                 </button>

@@ -8,19 +8,8 @@ const AboutPage = () => {
         <h1 className="text-center">About Us</h1>
         <hr />
         <p className="lead text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          facere doloremque veritatis odit similique sequi. Odit amet fuga nam
-          quam quasi facilis sed doloremque saepe sint perspiciatis explicabo
-          totam vero quas provident ipsam, veritatis nostrum velit quos
-          recusandae est mollitia esse fugit dolore laudantium. Ex vel explicabo
-          earum unde eligendi autem praesentium, doloremque distinctio nesciunt
-          porro tempore quis eaque labore voluptatibus ea necessitatibus
-          exercitationem tempora molestias. Ad consequuntur veniam sequi ullam
-          tempore vel tenetur soluta dolore sunt maxime aliquam corporis est,
-          quo saepe dolorem optio minus sint nemo totam dolorum! Reprehenderit
-          delectus expedita a alias nam recusandae illo debitis repellat libero,
-          quasi explicabo molestiae saepe, dolorem tempore itaque eveniet quam
-          dignissimos blanditiis excepturi harum numquam vel nihil? Ipsum
+        React is a popular JavaScript library used for building user interfaces, and it can be used to build e-commerce websites. An e-commerce website built with React typically includes several key components: Product listings: A page or pages that display products available for purchase, along with descriptions, prices, and other details. This can include features such as filtering by category or price range, sorting by popularity or price, and searching for specific products.React can be used in conjunction with other technologies such as Redux, a state management library, and various e-commerce platforms and payment gateways to build a fully functional and secure e-commerce website. The use of React can result in a fast and responsive user interface, making for a seamless shopping experience.
+
         </p>
 
         <h2 className="text-center py-4">Our Products</h2>

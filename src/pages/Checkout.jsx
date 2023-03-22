@@ -281,7 +281,7 @@ const Checkout = () => {
 
                     <button
                       className="w-100 btn btn-primary "
-                      type="submit" onClick={() =>{alert("confirmed")}}
+                      type="submit" onClick={() =>{alert("Your Order Has Been Confirmed")}}
                     >
                       Continue to checkout
                     </button>
